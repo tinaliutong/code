@@ -158,14 +158,14 @@ FigHandle = figure('Position', [100, 100, 1700, 800]);
 markerSize = 400;
 
 for i=1:15
-scatter(x_coor(i,:),Wang_7T_3T_ValenceEffect_uniqueSubj_fromExcel(i,:), markerSize,'o','LineWidth',3);
+scatter(x_coor(i,:),Wang_7T_3T_ValenceEffect_uniqueSubj(i,:), markerSize,'o','LineWidth',3);
 hold on
 end
 
 xlim([0 16])
 set(gca, 'tickdir', 'out');
-ylim([-.6 1.8]) % for para
-yticks([-.6 0 0.6 1.2 1.8])
+ylim([-.6 1.5]) % for para
+yticks([-.6 0 0.6 1.2])
 %yticklabels({'-0.5' '0' '0.5' '1'});
 
 for i = 1:15 
@@ -200,8 +200,8 @@ end
 
 xlim([0 16])
 set(gca, 'tickdir', 'out');
-ylim([-.6 1.8]) % for para
-yticks([-.6 0 0.6 1.2 1.8])
+ylim([-.6 1.5]) % for para
+yticks([-.6 0 0.6 1.2])
 
 for i = 1:15
 plot([x_coord(i,1), x_coord(i,2)],[Average_PosiValenceEffect_Wang_7T_3T_results_uniqueSubj(i), Average_PosiValenceEffect_Wang_7T_3T_results_uniqueSubj(i)], 'Color', 'k', 'LineStyle', '-','LineWidth',6); hold on
