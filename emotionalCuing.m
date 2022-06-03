@@ -7,11 +7,6 @@
 %    purpose: behavioral experiment to investigate emotional engagement & disengangement  
 %             https://www.sr-research.com/visual-angle-calculator/
 
-
-% addpath(genpath('~/proj/mrTools'))
-% addpath(genpath('~/proj/cnapStim'))
-% addpath(genpath('~/Desktop/mgl_Cassie'))
-
 function myscreen = emotionalCuing(varargin) 
 
 % check arguments
@@ -51,13 +46,12 @@ task{1}.parameter.emotion = [3 4 5]; % 3 = happy 4 = angry 5 = neutral
 task{1}.strings = {'AM', 'AF', 'HAS', 'ANS', 'NES'}; 
 
 % uniform random vars are randomly selected each trial
-task{1}.randVars.uniform.dotX = [11 -11]; %[3.54 -3.54];[6.47 -6.47] 
+task{1}.randVars.uniform.dotX = [6.47 -6.47]; %[3.54 -3.54]; 
 task{1}.randVars.uniform.dotY = [0.6 -0.6]; %[0.8, -0.8]; %[1.11, -1.11]
 % block random are blocked independently of the main expt
 % so every 10 trials will contain 4 invalid and 6 valid 
 task{1}.randVars.block.isValid = [zeros(1, 4), ones(1, 6)]; 
 % calculated rand var
-task{1}.parameter.facePos = 6.47; 
 task{1}.randVars.calculated.faceX = nan; 
 task{1}.randVars.calculated.whichFace = nan; 
 
@@ -113,23 +107,15 @@ myscreen = endTask(myscreen,task);
 function [task myscreen] = startSegmentCallback(task, myscreen)
 
 global stimulus;
-if (task.thistrial.thisseg == 1 )
-    % Where should the face be?
-    if task.thistrial.isValid
-        disp('valid')
-        if task.thistrial.dotX > 0
-            task.thistrial.faceX = task.thistrial.facePos; % positive value
-        elseif task.thistrial.dotX < 0
-            task.thistrial.faceX = -1 * task.thistrial.facePos;
-        end
-    else
-        disp('invalid')
-        if task.thistrial.dotX > 0
-            task.thistrial.faceX = -1 * task.thistrial.facePos; % positive value
-        elseif task.thistrial.dotX < 0
-            task.thistrial.faceX = task.thistrial.facePos;
-        end
-    end
+if (task.thistrial.thisseg == 1 ) 
+   % Where should the face be? 
+    if task.thistrial.isValid 
+        disp('valid') 
+        task.thistrial.faceX = task.thistrial.dotX; 
+    else 
+        disp('invalid') 
+       task.thistrial.faceX = -1 * task.thistrial.dotX;  
+    end 
     % display correctness 
     score = 0;
     if task.trialnum > 1 && isfield('task','correctness') % would ideally be nice to use isfield. But for some reason matlab is being annoying  
